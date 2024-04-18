@@ -12,12 +12,14 @@ import Plus from "../../assets/pngtree-plus-vector-icon-png-image_4017149.jpeg";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { useLocation, useParams } from "react-router-dom";
 
 interface shoeItemProps {
   data: shoeItem;
 }
 
 const ListItem = ({ data }: shoeItemProps) => {
+  const { pathname } = useLocation();
   const onAddHnadler = async (shoeItem: shoeItem) => {
     await axios.post(
       `https://654d5291cbc3253557417ba3.mockapi.io/basket`,
@@ -30,6 +32,7 @@ const ListItem = ({ data }: shoeItemProps) => {
         background: "#161d2f",
         border: "none",
         width: "300px",
+        maxHeight: "200px",
         borderRadius: 5,
         position: "relative",
       }}
@@ -42,17 +45,31 @@ const ListItem = ({ data }: shoeItemProps) => {
       >
         <CardContent>
           <Stack spacing={2} direction="row">
-            <Button
-              onClick={() => onAddHnadler(data)}
-              sx={{
-                position: "absolute",
-                right: "10px",
-                top: "10px",
-              }}
-              variant="contained"
-            >
-              Add
-            </Button>
+            {pathname === "/card" ? (
+              <Button
+                //  onClick={() => onAddHnadler(data)}
+                sx={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "10px",
+                }}
+                variant="contained"
+              >
+                Delete
+              </Button>
+            ) : (
+              <Button
+                onClick={() => onAddHnadler(data)}
+                sx={{
+                  position: "absolute",
+                  right: "10px",
+                  top: "10px",
+                }}
+                variant="contained"
+              >
+                Add
+              </Button>
+            )}
           </Stack>
           <Typography
             sx={{

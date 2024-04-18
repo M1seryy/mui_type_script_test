@@ -19,7 +19,15 @@ const Basket = () => {
     onGetBasketHandler();
   }, []);
   return (
-    <Box>
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        flexDirection: "column",
+        gap: 4,
+        // py: 2,
+      }}
+    >
       {basket
         ? basket.map((item: shoeItem) => {
             return <ListItem data={item} />;

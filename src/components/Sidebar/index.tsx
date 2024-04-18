@@ -31,7 +31,7 @@ const Sidebar = ({ onChangeFilter }: any) => {
         boxSizing: "border-box",
       }}
     >
-      <Link className="nav-link"  to={"/card"}>
+      <Link className="nav-link" to={"/card"}>
         <Typography
           sx={{
             color: "#fff",
@@ -45,7 +45,7 @@ const Sidebar = ({ onChangeFilter }: any) => {
             },
           }}
         >
-          My card
+         Card
         </Typography>
       </Link>
 
