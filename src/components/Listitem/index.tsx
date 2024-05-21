@@ -20,11 +20,18 @@ interface shoeItemProps {
 
 const ListItem = ({ data }: shoeItemProps) => {
   const { pathname } = useLocation();
-  const onAddHnadler = async (shoeItem: shoeItem) => {
-    await axios.post(
-      `https://654d5291cbc3253557417ba3.mockapi.io/basket`,
-      shoeItem
-    );
+  const onAddHnadler = async (id: number, type: string) => {
+    //test id 6634b9ca589a9a5bed2a80e4
+    let changeData;
+    if (type === "add") {
+      changeData = {
+        favourite: true,
+      };
+    } else
+      changeData = {
+        favourite: false,
+      };
+    await axios.patch(`http://localhost:3000/api/sneakers/${id}`, changeData);
   };
   return (
     <Card
@@ -32,7 +39,7 @@ const ListItem = ({ data }: shoeItemProps) => {
         background: "#161d2f",
         border: "none",
         width: "300px",
-        maxHeight: "200px",
+        minHeight: "380px",
         borderRadius: 5,
         position: "relative",
       }}
@@ -47,11 +54,11 @@ const ListItem = ({ data }: shoeItemProps) => {
           <Stack spacing={2} direction="row">
             {pathname === "/card" ? (
               <Button
-                //  onClick={() => onAddHnadler(data)}
+                onClick={() => onAddHnadler(data._id, "delete")}
                 sx={{
                   position: "absolute",
                   right: "10px",
-                  top: "10px",
+                  bottom: "10px",
                 }}
                 variant="contained"
               >
@@ -59,11 +66,11 @@ const ListItem = ({ data }: shoeItemProps) => {
               </Button>
             ) : (
               <Button
-                onClick={() => onAddHnadler(data)}
+                onClick={() => onAddHnadler(data._id, "add")}
                 sx={{
                   position: "absolute",
                   right: "10px",
-                  top: "10px",
+                  bottom: "10px",
                 }}
                 variant="contained"
               >
@@ -77,23 +84,23 @@ const ListItem = ({ data }: shoeItemProps) => {
               color: "white",
               fontFamily: "sans-serif",
               fontWeight: "800",
+              width: "250px",
+              minHeight: "60px",
             }}
             gutterBottom
           >
             {data.name}
           </Typography>
-          {/* <Typography sx={{ color: "white" }} variant="h5" component="div">
-            {data.category}
-          </Typography> */}
+
+          <img className="shoe_img" src={data.original_picture_url} alt="" />
+
           <Typography sx={{ color: "white" }} color="text.secondary">
-            Price: {data.price}$
+            Price:
+            {data.retail_price_cents / 100}$
           </Typography>
           <Typography variant="body2" sx={{ color: "white" }}>
-            Brand {data.brand}
+            Brand {data.brand_name}
             <br />
-          </Typography>
-          <Typography variant="body2" sx={{ color: "white" }}>
-            {data.is_in_inventory ? "Available" : "Out of stock"}
           </Typography>
         </CardContent>
 

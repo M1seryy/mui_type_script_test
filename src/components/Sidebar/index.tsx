@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 const Sidebar = ({ onChangeFilter }: any) => {
   const brands: Array<string> = [
     "ALL",
-    "NIKE",
-    "HUSHPUPPIES",
-    "ADIDAS",
-    "Reebok",
-    "Vans",
+    "Nike",
+    "Air Jordan",
+    "adidas",
+    "Gucci",
+    "Converse",
   ];
 
   const onFilterChange = (name: string) => {

@@ -6,21 +6,19 @@ import { shoeItem } from "../../App";
 import ListItem from "../Listitem";
 import Loader from "../loader";
 
-const Basket = () => {
+const Basket = ({ data }: any) => {
   const [basket, setBasket] = useState<shoeItem[]>([]);
   const [error, setError] = useState(false);
 
   const onGetBasketHandler = async () => {
-    const res = await axios.get(
-      "https://654d5291cbc3253557417ba3.mockapi.io/basket"
-    );
-
-    console.log(res);
-    setBasket(res.data);
-
-    if (res.data.length === 0) {
-      setError(true);
-    }
+    // const res = await axios.get(
+    //   "https://654d5291cbc3253557417ba3.mockapi.io/basket"
+    // );
+    // console.log(res);
+    // setBasket(res.data);
+    // if (res.data.length === 0) {
+    //   setError(true);
+    // }
   };
 
   useEffect(() => {
@@ -36,23 +34,11 @@ const Basket = () => {
         // py: 2,
       }}
     >
-      {error ? (
-        basket.length !== 0 ? (
-          basket.map((item: shoeItem) => {
-            return <ListItem data={item} />;
-          })
-        ) : // <Typography
-        // sx={{
-        //   fontSize: 30,
-        //   color: "white",
-        // }}
-        // >
-        //   Your card is empty
-        // </Typography>
-        null
-      ) : (
-       <Loader/>
-      )}
+      {data
+        .filter((item: shoeItem) => item.favourite === true)
+        .map((item: shoeItem) => {
+          return <ListItem data={item} />;
+        })}
     </Box>
   );
 };
