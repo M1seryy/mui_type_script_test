@@ -2,18 +2,19 @@ import React, {
   ChangeEvent,
   FormEvent,
   RefObject,
+  useEffect,
   useRef,
   useState,
 } from "react";
 import "./login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../redux/slices/auth";
-import { AxiosResponse } from "axios";
+import axios, { AxiosResponse } from "axios";
 import { AsyncThunkAction } from "@reduxjs/toolkit";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const token: any = useSelector((state: any) => state.auth.token);
+  const token: any = useSelector((state: any) => state.auth);
   const [formEmail, setEmail] = useState("");
   const [formPass, setPass] = useState("");
   const navigate = useNavigate();
@@ -24,13 +25,32 @@ const Login = () => {
 
   const dispatch = useDispatch<any>();
 
+  // const [userDataToken, setUserData] = useState<string>();
+  // const getCurrentUser = async (token: string | null) => {
+  //   if (token !== null) {
+  //     const userData: any = await axios.post(
+  //       `http://localhost:3000/api/auth/current`,
+  //       {
+  //         token,
+  //       }
+  //     );
+  //     setUserData(userData.data.data.email);
+  //   }
+  //   return;
+  // };
+  // const localToken: string | null = localStorage.getItem("authToken");
+  // useEffect(() => {
+  //   getCurrentUser(localToken);
+  // }, []);
+
   const authLogin = async () => {
     const data: authData = {
       email: formEmail,
       password: formPass,
     };
-    dispatch(loginUser(data));
-    if (token.length !== 1) {
+    const userData = await dispatch(loginUser(data));
+    if (token.token.length !== 1) {
+      localStorage.setItem("authToken", userData.payload.data.token);
       navigate("/home");
     }
   };

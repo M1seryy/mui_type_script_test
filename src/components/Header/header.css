@@ -1,0 +1,21 @@
+.header {
+  width: 100%;
+  background-color: #10131f;
+  height: 90px;
+}
+.nav-container {
+  display: flex;
+  gap: 20px;
+}
+.nav-items {
+  font-size: 30px;
+  text-decoration: none;
+  color: white;
+}
+.parent-container {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-sizing: border-box;
+}

@@ -31,42 +31,6 @@ const Sidebar = ({ onChangeFilter }: any) => {
         boxSizing: "border-box",
       }}
     >
-      <Link className="nav-link" to={"/"}>
-        <Typography
-          sx={{
-            color: "#fff",
-            fontSize: 35,
-            fontWeight: "800",
-
-            ":hover": {
-              color: "grey",
-              transition: "300ms",
-              alignItems: "center",
-            },
-          }}
-        >
-          Main
-        </Typography>
-      </Link>
-
-      <Link className="nav-link" to={"/card"}>
-        <Typography
-          sx={{
-            color: "#fff",
-            fontSize: 35,
-            fontWeight: "800",
-
-            ":hover": {
-              color: "grey",
-              transition: "300ms",
-              alignItems: "center",
-            },
-          }}
-        >
-          Card
-        </Typography>
-      </Link>
-
       {brands.map((item) => {
         return (
           <Typography

@@ -10,6 +10,7 @@ import { Route, Routes } from "react-router-dom";
 import Basket from "./components/Basket";
 import path from "path";
 import Login from "./components/Login/Login";
+import Header from "./components/Header";
 
 export interface shoeItem {
   _id: number;
@@ -64,24 +65,40 @@ function App() {
             path="/home"
             element={
               <>
-                <Sidebar onChangeFilter={setFilter} />
                 <Box
                   sx={{
                     display: "flex",
                     flexDirection: "column",
-
-                    width: "100%",
                   }}
                 >
-                  <Search filter={setSearchValue} />\
-                  <List
-                    data={currentSneakers}
-                    search={searchValue}
-                    filter={filter}
-                    pagination={pagination}
-                    totalSneakers={data.length}
-                    onPaginate={onPaginate}
-                  />
+                  <Header />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: 5,
+                      overflow: "auto",
+                    }}
+                  >
+                    <Sidebar onChangeFilter={setFilter} />
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+
+                        width: "100%",
+                      }}
+                    >
+                      <Search filter={setSearchValue} />\
+                      <List
+                        data={currentSneakers}
+                        search={searchValue}
+                        filter={filter}
+                        pagination={pagination}
+                        totalSneakers={data.length}
+                        onPaginate={onPaginate}
+                      />
+                    </Box>
+                  </Box>
                 </Box>
               </>
             }
@@ -91,8 +108,24 @@ function App() {
             path="/card"
             element={
               <>
-                <Sidebar onChangeFilter={setFilter} />
-                <Basket data={data} />
+                <Box
+                  sx={{
+                    width:"100%",
+                    display: "flex",
+                    flexDirection: "column",
+                  }}
+                >
+                  <Header />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      gap: 5,
+                    }}
+                  >
+                    <Sidebar onChangeFilter={setFilter} />
+                    <Basket data={data} />
+                  </Box>
+                </Box>
               </>
             }
           />

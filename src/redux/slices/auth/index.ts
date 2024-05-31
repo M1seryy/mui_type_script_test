@@ -39,6 +39,7 @@ interface state {
   isLoggedIn: boolean;
   isRefreshing: boolean;
   error: string;
+  setUserProfileEmail: any;
 }
 
 const initialState: state = {
@@ -47,6 +48,7 @@ const initialState: state = {
   isLoggedIn: false,
   isRefreshing: false,
   error: "",
+  setUserProfileEmail: null,
 };
 
 const authSlice = createSlice({
@@ -55,8 +57,10 @@ const authSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(loginUser.fulfilled, (state, action) => {
+      console.log('action: ', action);
       state.profile = action.payload.data;
       state.token = action.payload.data.token;
+      state.setUserProfileEmail = action.payload.data.email;
     });
   },
 });

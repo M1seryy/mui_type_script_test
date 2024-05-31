@@ -13,9 +13,8 @@ const Layout = ({ children }: LayoutProp) => {
         display: "flex",
         flexDirection: "row",
         gap: 5,
-        height: "100vh",
+        height: "110vh",
         p: 3,
-        overflow: "auto",
       }}
     >
       {children}
